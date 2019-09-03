@@ -45,12 +45,12 @@ INSTALLED_APPS = [
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'todolist_project.urls'
@@ -73,14 +73,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'todolist_project.wsgi.application'
 
-# TODO: Change database to PostgreSQL
+
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'myproject',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'USER': 'myprojectuser',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -123,4 +129,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# CORS Configuration
+CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = ('localhost:3000/')

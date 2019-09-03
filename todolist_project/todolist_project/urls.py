@@ -19,10 +19,10 @@ from rest_framework.routers import DefaultRouter
 from todolist import views
 
 router = DefaultRouter()
-router.register(r'todos', views.TodoViewSet, 'todo')
+router.register(r'todos', views.TodoViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # url(r'', include('todolist.urls')),
-    url(r'^api/', include(router.urls)),
+    url(r'^api/', include(router.urls, namespace='todolist1')),
 ]
