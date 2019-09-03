@@ -1,11 +1,15 @@
-'''
-    app's urls.py
-'''
+# '''
+#     app's urls.py
+# '''
 
-from django.conf.urls import url
-from . import views
+# from django.conf.urls import url, include
+# from rest_framework import routers
+# from . import views
 
-app_name = 'todolist'
-urlpatterns = [
-    url(r'^$', views.index, name='index')
-]
+# router = routers.DefaultRouter()
+# router.register(r'todos', views.TodoViewSet, 'todo')
+
+# urlpatterns = [
+#     # url(r'^$', views.index, name='index'),
+#     url(r'^api/$', include(router.urls)),
+# ]

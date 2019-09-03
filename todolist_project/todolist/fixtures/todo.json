@@ -1,0 +1,22 @@
+[
+    {
+        "model": "todolist.todomodel",
+        "pk": 1,
+        "fields": {
+            "title": "Armin",
+            "description": "something@gmail.com",
+            "check_box": "True",
+            "created_time": "2018-02-14 00:00:00"
+        }
+    },
+    {
+        "model": "todolist.todomodel",
+        "pk": 2,
+        "fields": {
+            "title": "Tom",
+            "description": "tomsomething@gmail.com",
+            "check_box": "False",
+            "created_time": "2018-01-14 00:00:00"
+        }
+    }
+]
