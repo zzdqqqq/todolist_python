@@ -20,6 +20,7 @@ from todolist import views
 
 router = DefaultRouter()
 router.register(r'todos', views.TodoViewSet)
+# router.register(r'test', views.TestViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
