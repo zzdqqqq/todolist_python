@@ -1,20 +1,25 @@
 import React, { Component } from "react";
+import { UncontrolledCollapse} from 'reactstrap';
+import Moment from 'react-moment';
 import Modal from "./components/Modal";
 import axios from "axios";
 
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       viewCompleted: false,
       activeItem: {
         title: "",
         description: "",
-        completed: false
+        completed: false,
+        createdDate: "",
       },
-      todoList: []
+      todoList: [],
     };
   }
+
   componentDidMount() {
     this.refreshList();
   }
@@ -24,61 +29,41 @@ class App extends Component {
       .then(res => this.setState({ todoList: res.data }))
       .catch(err => console.log(err));
   };
-  displayCompleted = status => {
-    if (status) {
-      return this.setState({ viewCompleted: true });
-    }
-    return this.setState({ viewCompleted: false });
-  };
-  renderTabList = () => {
-    return (
-      <div className="my-5 tab-list">
-        <span
-          onClick={() => this.displayCompleted(true)}
-          className={this.state.viewCompleted ? "active" : ""}
-        >
-          completed
-        </span>
-        <span
-          onClick={() => this.displayCompleted(false)}
-          className={this.state.viewCompleted ? "" : "active"}
-        >
-          Incompleted
-        </span>
-      </div>
-    );
-  };
+
+
   renderItems = () => {
-    const { viewCompleted } = this.state;
-    const newItems = this.state.todoList.filter(
-      item => item.completed === viewCompleted
-    );
+    const newItems = this.state.todoList;
     return newItems.map(item => (
       <li
         key={item.id}
-        className="list-group-item d-flex justify-content-between align-items-center"
+        className="list-group-item d-flex list-group-item-action justify-content-between align-items-center"
       >
         <span
           className={`todo-title mr-2 ${
-            this.state.viewCompleted ? "completed-todo" : ""
+            item.completed ? "completed-todo" : ""
           }`}
-          title={item.description}
         >
           {item.title}
+          <UncontrolledCollapse toggler="#toggler">
+            <div className="card">
+              <div className="card-title m-3 font-italic">Created Date: <Moment format="YYYY/MM/DD--HH:MM">{item.createdDate}</Moment></div>
+              <div className="card-body m-0">{item.description}</div>
+            </div>
+          </UncontrolledCollapse>
         </span>
-        <span>
+
+        <span className="row">
           <button
             onClick={() => this.editItem(item)}
-            className="btn btn-secondary mr-2"
+            className="btn btn-light font-weight-light mr-2"
           >
-            {" "}
-            Edit{" "}
+            Edit
           </button>
           <button
             onClick={() => this.handleDelete(item)}
-            className="btn btn-danger"
+            className="btn btn-dark font-weight-light"
           >
-            Delete{" "}
+            Delete
           </button>
         </span>
       </li>
@@ -105,7 +90,7 @@ class App extends Component {
       .then(res => this.refreshList());
   };
   createItem = () => {
-    const item = { title: "", description: "", completed: false };
+    const item = { title: "", description: "", completed: false, createdDate: "" };
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
   editItem = item => {
@@ -114,16 +99,19 @@ class App extends Component {
   render() {
     return (
       <main className="content">
-        <h1 className="text-white text-uppercase text-center my-4">Todo app</h1>
+        <h1 className="text-dark text-center my-5">Pre Work</h1>
         <div className="row ">
-          <div className="col-md-6 col-sm-10 mx-auto p-0">
-            <div className="card p-3">
-              <div className="">
-                <button onClick={this.createItem} className="btn btn-primary">
+          <div className="col-lg-5 col-sm-10 mx-auto">
+            <div className="card">
+              <img className="img-fluid" src={"/todolist.png"} alt={"test"} />
+              <div className="row m-3 my-3">
+                <button onClick={this.createItem} className="btn btn-light btn-lg font-weight-light">
                   Add task
                 </button>
+                <button className="btn btn-light btn-lg mx-3 font-weight-light" id="toggler">
+                  Show detail
+                </button>
               </div>
-              {this.renderTabList()}
               <ul className="list-group list-group-flush">
                 {this.renderItems()}
               </ul>

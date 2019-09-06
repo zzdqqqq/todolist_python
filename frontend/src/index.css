@@ -6,7 +6,7 @@
         sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      background-color: #282c34;
+      background-color: #ffffff;
     }
     .todo-title {
       cursor: pointer;
@@ -22,6 +22,6 @@
       cursor: pointer;
     }
     .tab-list > span.active {
-      background-color: #282c34;
-      color: #ffffff;
+      background-color: grey;
+      color: #282c34;
     }
