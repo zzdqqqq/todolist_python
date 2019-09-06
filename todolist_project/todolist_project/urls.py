@@ -24,6 +24,5 @@ router.register(r'todos', views.TodoViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'', include('todolist.urls')),
     url(r'^api/', include(router.urls, namespace='todolist1')),
 ]
