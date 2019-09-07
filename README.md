@@ -10,7 +10,7 @@
 - [x] List all tasks
 
 ## TODO
-- [x] Flip page (paginator)
+- [] Flip page (paginator)
 
 ## Example
 ***
